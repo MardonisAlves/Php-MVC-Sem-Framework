@@ -1,0 +1,26 @@
+{
+
+"name": "bookstore",
+"description": "Manages an online bookstore.",
+"minimum-stability": "stable",
+"license": "Licença Academic Free v3.0",
+"type": "project",
+
+"authors": [
+	{
+	"name": "Mardonis Alves B",
+	"email": "mardonisgp@gmail.com"
+	}
+
+],
+    "require": {
+        "monolog/monolog": "^2.2",
+        "twig/twig": "^3.2"
+    },
+    "autoload":{
+
+    	"psr-4":{
+    		"Bookstore\\": "src"
+    	}
+    }
+}
