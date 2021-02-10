@@ -38,7 +38,7 @@ class CustomerController extends AbstractController{
 			return $this->render('index.twig', $params);
 		}
 		setcookie('user', $customer->getId());
-		var_dump($_COOKIE['user']);
+		
 		$newController = new BookController($this->di ,$this->request);
 		return $newController->getAll();
 

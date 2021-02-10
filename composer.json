@@ -1,14 +1,14 @@
 {
 
-"name": "bookstore",
-"description": "Manages an online bookstore.",
+"name": "bookstore/livros",
+"description": "manages an online bookstore.",
 "minimum-stability": "stable",
 "license": "Licença Academic Free v3.0",
 "type": "project",
 
 "authors": [
 	{
-	"name": "Mardonis Alves B",
+	"name": " ",
 	"email": "mardonisgp@gmail.com"
 	}
 
@@ -22,5 +22,8 @@
     	"psr-4":{
     		"Bookstore\\": "src"
     	}
-    }
+    },
+	"require-dev": {
+		"phpunit/phpunit": "^5"
+	}
 }

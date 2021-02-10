@@ -21,7 +21,7 @@ class Router {
 
 
 	public function router(Request $request): string {
-		echo	$path = $request->getPath();
+	
 		foreach ($this->routeMap as $route => $info) {
 			$regexRoute = $this->getRegexRoute($route, $info);
 			if (preg_match("@^/$regexRoute$@", $path)) {		

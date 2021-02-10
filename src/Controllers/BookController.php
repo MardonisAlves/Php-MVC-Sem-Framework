@@ -43,9 +43,7 @@ class BookController extends AbstractController{
 			$book = $bookModel->get($bookId);
 		} catch (\Exception $e) {
 			
-			$this->log->error(
-				'Error getting book: ' . $e->getMessage()
-			);
+			$this->log->error('Error getting book: ' . $e->getMessage()	);
 			
 			$properties = ['errorMessage' => 'Book not found!'];
 			return $this->render('error.twig', $properties);
