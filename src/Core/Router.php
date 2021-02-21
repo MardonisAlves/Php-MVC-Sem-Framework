@@ -5,6 +5,7 @@ use Bookstore\Controllers\CustomerController;
 use Bookstore\Utils\DependencyInjector;
 
 class Router {
+	
 	private $routeMap;
 	private static $regexPatters = [
 		'number' => '\d+',
@@ -24,12 +25,14 @@ class Router {
 	
 		foreach ($this->routeMap as $route => $info) {
 			$regexRoute = $this->getRegexRoute($route, $info);
-			if (preg_match("@^/$regexRoute$@", $path)) {		
+			$path = $request->getPath();
+			if (preg_match("@^/$regexRoute$@" , $path)) {
+
 				return $this->executeController($route, $path, $info, $request);
 			}
 		}
 
-		$errorController = new ErrorController($this->id , $request);
+		$errorController = new ErrorController($this->di , $request);
 		return $errorController->notFound();
 		
 	}
@@ -52,11 +55,11 @@ class Router {
 
 
 	private function extractParams(string $route, string $path) : array{
-
+		
 		$params = [];
 		$pathParts = explode('/', $path);
 		$routeParts = explode('/', $route);
-
+		var_dump($pathParts);
 		foreach ($routeParts as $key => $routePart) {
 
 			if (strpos($routePart, ':') === 0) {
@@ -68,7 +71,7 @@ class Router {
 	}
 
 
-	private function executeController(	string $route,string $path,array $info,Request $request): string {
+	private function executeController(	string $route, string $path , array $info,Request $request): string {
 		$controllerName = '\Bookstore\Controllers\\' . $info['controller'] . 'Controller';
 
 		$controller = new $controllerName($this->di , $request);
@@ -79,7 +82,7 @@ class Router {
 				$customerId = $request->getCookies()->get('user');
 				$controller->setCustomerId($customerId);
 			} else {
-				$errorController = new CustomerController($this->id ,$request);
+				$errorController = new CustomerController($this->di ,$request);
 				
 				
 				return $errorController->login();
@@ -87,6 +90,7 @@ class Router {
 			}
 		}
 		$params = $this->extractParams($route, $path);
+
 		return call_user_func_array([$controller, $info['method']], $params);
 	}
 

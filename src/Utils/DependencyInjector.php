@@ -11,7 +11,7 @@ class DependencyInjector
 	}
 	public function get(string $name) {
 		if (isset($this->dependencies[$name])) {
-			echo "ola";
+			
 			return $this->dependencies[$name];
 		}
 		throw new NotFoundException(
